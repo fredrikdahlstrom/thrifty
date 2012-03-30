@@ -1,0 +1,92 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.videoplaza.thrifty</groupId>
+   <artifactId>thrifty</artifactId>
+   <version>0.1-SNAPSHOT</version>
+   <packaging>pom</packaging>
+
+   <name>${project.artifactId}</name>
+   <description>Thrifty</description>
+   <inceptionYear>2012</inceptionYear>
+
+   <properties>
+      <!-- Common plugin settings -->
+      <scala.version>2.9.1</scala.version>
+      <encoding>UTF-8</encoding>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+      <!-- vscaladoc settings -->
+      <maven.scaladoc.vscaladocVersion>1.2-m1</maven.scaladoc.vscaladocVersion>
+   </properties>
+
+   <repositories>
+      <repository>
+         <id>scala-tools.org</id>
+         <name>Scala-Tools Maven2 Repository</name>
+         <url>http://scala-tools.org/repo-releases</url>
+      </repository>
+      <repository>
+         <id>vp-snapshots</id>
+         <name>Videoplaza Snapshot Repository</name>
+         <url>http://nexus.videoplaza.org/nexus/content/repositories/snapshots</url>
+      </repository>
+   </repositories>
+
+   <pluginRepositories>
+      <pluginRepository>
+         <id>scala-tools.org</id>
+         <name>Scala-Tools Maven2 Repository</name>
+         <url>http://scala-tools.org/repo-releases</url>
+      </pluginRepository>
+   </pluginRepositories>
+
+   <build>
+      <pluginManagement>
+         <plugins>
+            <plugin>
+               <groupId>org.scala-tools</groupId>
+               <artifactId>maven-scala-plugin</artifactId>
+               <version>2.15.2</version>
+               <executions>
+                  <execution>
+                     <phase>process-resources</phase>
+                     <goals>
+                        <goal>compile</goal>
+                        <goal>testCompile</goal>
+                     </goals>
+                     <configuration>
+                        <args>
+                           <arg>-deprecation</arg>
+                           <arg>-dependencyfile</arg>
+                           <arg>${project.build.directory}/.scala_dependencies</arg>
+                        </args>
+                     </configuration>
+                  </execution>
+               </executions>
+            </plugin>
+            <plugin>
+               <artifactId>maven-compiler-plugin</artifactId>
+               <version>2.3.2</version>
+               <configuration>
+                  <source>1.6</source>
+                  <target>1.6</target>
+               </configuration>
+            </plugin>
+         </plugins>
+      </pluginManagement>
+   </build>
+   <profiles>
+      <profile>
+         <id>default</id>
+         <activation>
+            <activeByDefault>true</activeByDefault>
+         </activation>
+         <modules>
+            <module>thrifty-api</module>
+            <module>thrifty-service</module>
+            <module>thrifty-client</module>
+         </modules>
+      </profile>
+   </profiles>
+</project>
